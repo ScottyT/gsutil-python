@@ -1,0 +1,4 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/code-red-app-313517/gsutil-python', '.']
+images: ['gcr.io/code-red-app-313517/gsutil-python:latest']
