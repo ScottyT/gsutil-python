@@ -4,6 +4,7 @@ import subprocess
 import firebase_admin
 from firebase_admin import credentials, auth
 from flask import Flask, request
+from firebase_config import AuthMiddleware
 from functools import wraps
 from shutil import make_archive
 from zipfile import ZipFile
@@ -12,7 +13,7 @@ from zipfile import ZipFile
 app = Flask(__name__)
 firebase = firebase_admin.initialize_app()
 users = [{'uid': 1, 'name': 'Noah Schairer'}]
-
+app.wsgi_app = AuthMiddleware(app.wsgi_app)
 def check_token(f):
     @wraps(f)
     def wrap(*args, **kwargs):
